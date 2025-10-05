@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazım Yanlışı Quiz Uygulaması</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .sound-btn {
+            background: #e67e22;
+        }
+
+        .sound-btn:hover {
+            background: #d35400;
+        }
+
+        .main-menu-btn {
+            background: #e74c3c;
+        }
+
+        .main-menu-btn:hover {
+            background: #c0392b;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .progress-item {
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .question-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            flex: 1;
+            padding: 20px;
+            border: 3px solid #bdc3c7;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s;
+            background: white;
+            color: #2c3e50;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .correct {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .incorrect {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border-color: #c0392b;
+        }
+
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .correct-feedback {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .incorrect-feedback {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .score-container {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .set-completed {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+
+        .final-score {
+            font-size: 2em;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+
+        .total-score {
+            font-size: 1.5em;
+            color: #3498db;
+            margin: 15px 0;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .home-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .home-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 300px;
+            margin: 30px auto;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .word-list-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+
+        .sound-icon {
+            margin-right: 5px;
+        }
+
+        /* Kelime Listesi Stilleri */
+        .word-list-screen {
+            padding: 20px;
+            display: none;
+        }
+
+        .word-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .word-list-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+        }
+
+        .word-list-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+
+        .word-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .word-item {
+            padding: 10px 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-buttons">
+                <button class="header-btn main-menu-btn" id="mainMenuBtn">🏠 Ana Sayfa</button>
+            </div>
+            <div>
+                <h1>Yazım Yanlışı Quiz</h1>
+                <p>Hangisi doğru yazılmış?</p>
+            </div>
+            <div class="header-buttons">
+                <button class="header-btn sound-btn" id="soundBtn">
+                    <span class="sound-icon">🔊</span> Ses Açık
+                </button>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quizContainer">
+            <!-- Home Screen -->
+            <div class="home-screen" id="homeScreen">
+                <h2>Yazım Kılavuzu Quiz'e Hoş Geldiniz!</h2>
+                <div class="instructions">
+                    <h3>Nasıl Oynanır:</h3>
+                    <ul>
+                        <li>Her soruda iki farklı kelime göreceksiniz - biri doğru, diğeri yanlış yazılmış</li>
+                        <li>Doğru yazılmış olanı seçin</li>
+                        <li>Doğru cevap verirseniz mavi renk ve "ding" sesi duyacaksınız</li>
+                        <li>Yanlış cevap verirseniz kırmızı renk ve "dong" sesi duyacaksınız</li>
+                        <li>Her set 10 sorudan oluşur</li>
+                        <li>Set sonunda yanlış cevaplarınızı tekrar çözebilirsiniz</li>
+                        <li>Üstteki ses butonu ile sesi açıp kapatabilirsiniz</li>
+                    </ul>
+                </div>
+                <div class="home-buttons">
+                    <button class="home-btn" id="startBtn">QUIZ'E BAŞLA</button>
+                    <button class="home-btn word-list-btn" id="wordListBtn">📚 Kelime Çalışma Tablosu</button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quizScreen" style="display: none;">
+                <div class="progress">
+                    <div class="progress-item">Set: <span id="currentSet">1</span>/<span id="totalSets">32</span></div>
+                    <div class="progress-item">Soru: <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></div>
+                    <div class="progress-item">Set Skoru: <span id="currentScore">0</span>/<span id="currentTotal">10</span></div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question" id="questionText">Hangisi doğru yazılmış?</div>
+                    <div class="options-container">
+                        <div class="option" id="option1"></div>
+                        <div class="option" id="option2"></div>
+                    </div>
+                </div>
+
+                <div class="feedback correct-feedback" id="correctFeedback">
+                    ✓ Doğru! Tebrikler!
+                </div>
+                <div class="feedback incorrect-feedback" id="incorrectFeedback">
+                    ✗ Yanlış! Doğrusu: <span id="correctAnswerText"></span>
+                </div>
+
+                <div class="score-container">
+                    Toplam Skor: <span id="overallScore">0</span> doğru
+                </div>
+            </div>
+
+            <!-- Set Completed Screen -->
+            <div class="set-completed" id="setCompleted">
+                <h2>Set Tamamlandı!</h2>
+                <div class="final-score">
+                    Set Skoru: <span id="finalScore">0</span>/<span id="finalTotal">10</span>
+                </div>
+                <div class="total-score">
+                    Toplam Skor: <span id="finalOverallScore">0</span> doğru
+                </div>
+                <p id="setMessage"></p>
+                <div class="buttons-container">
+                    <button class="btn retry-btn" id="retryWrongBtn">Yanlışları Tekrar Çöz</button>
+                    <button class="btn next-btn" id="nextSetBtn">Sonraki Set</button>
+                </div>
+            </div>
+
+            <!-- Kelime Listesi Ekranı -->
+            <div class="word-list-screen" id="wordListScreen">
+                <div class="word-list-header">
+                    <h2 class="word-list-title">📚 Kelime Çalışma Tablosu</h2>
+                    <button class="back-btn" id="backToListBtn">← Geri</button>
+                </div>
+                <p>İşte tüm kelimelerin doğru yazımları alfabetik sırayla:</p>
+                <div class="word-list-container">
+                    <div class="word-list" id="wordListContainer">
+                        <!-- Kelimeler buraya JavaScript ile eklenecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Güncellenmiş 320 kelimelik liste
+        const wordPairs = [
+            { correct: "absürt", incorrect: "absürd" },
+            { correct: "abur cubur", incorrect: "aburcubur" },
+            { correct: "acayip", incorrect: "acaib" },
+            { correct: "açık büfe", incorrect: "açıkbüfe" },
+            { correct: "açık oturum", incorrect: "açıkoturum" },
+            { correct: "açıkgöz", incorrect: "açık göz" },
+            { correct: "ada çayı", incorrect: "adaçayı" },
+            { correct: "adamakıllı", incorrect: "adam akıllı" },
+            { correct: "ağırbaşlı", incorrect: "ağır başlı" },
+            { correct: "ağustos böceği", incorrect: "ağustosböceği" },
+            { correct: "ağzı sıkı", incorrect: "ağzısıkı" },
+            { correct: "aidat", incorrect: "ayidat" },
+            { correct: "akarsu", incorrect: "akar su" },
+            { correct: "akaryakıt", incorrect: "akar yakıt" },
+            { correct: "aksesuar", incorrect: "aksesüar" },
+            { correct: "akşamüstü", incorrect: "akşam üstü" },
+            { correct: "aktüel", incorrect: "aktuel" },
+            { correct: "alaca karanlık", incorrect: "alacakaranlık" },
+            { correct: "alçak gönüllü", incorrect: "alçakgönüllü" },
+            { correct: "alın yazısı", incorrect: "alınyazısı" },
+            { correct: "alışveriş", incorrect: "alış veriş" },
+            { correct: "ana düşünce", incorrect: "anadüşünce" },
+            { correct: "anaokulu", incorrect: "ana okulu" },
+            { correct: "anapara", incorrect: "ana para" },
+            { correct: "anayasa", incorrect: "ana yasa" },
+            { correct: "Antik Çağ", incorrect: "antikçağ" },
+            { correct: "antrenman", incorrect: "antreman" },
+            { correct: "ardı sıra", incorrect: "ardısıra" },
+            { correct: "artakalmak", incorrect: "arta kalmak" },
+            { correct: "asfalt", incorrect: "asvalt" },
+            { correct: "ay ışığı", incorrect: "ayışığı" },
+            { correct: "Ay tutulması", incorrect: "ay tutulması" },
+            { correct: "basmakalıp", incorrect: "basma kalıp" },
+            { correct: "başa baş", incorrect: "başabaş" },
+            { correct: "baş etmek", incorrect: "başetmek" },
+            { correct: "başhekim", incorrect: "baş hekim" },
+            { correct: "başyapıt", incorrect: "baş yapıt" },
+            { correct: "bilim kurgu", incorrect: "bilimkurgu" },
+            { correct: "bilim adamı", incorrect: "bilimadamı" },
+            { correct: "birebir (etkili)", incorrect: "bire bir (etkili)" },
+            { correct: "bire bir (aynı, tıpkı)", incorrect: "birebir (aynı, tıpkı)" },
+            { correct: "birtakım", incorrect: "bir takım" },
+            { correct: "blok", incorrect: "bilok" },
+            { correct: "boşboğaz", incorrect: "boş boğaz" },
+            { correct: "boylu boslu", incorrect: "boyluboslu" },
+            { correct: "buz dağı", incorrect: "buzdağı" },
+            { correct: "Buzul Çağı", incorrect: "Buzulçağı" },
+            { correct: "canı tez", incorrect: "canıtez" },
+            { correct: "çağ dışı", incorrect: "çağdışı" },
+            { correct: "çalakalem", incorrect: "çala kalem" },
+            { correct: "çalar saat", incorrect: "çalarsaat" },
+            { correct: "çalı çırpı", incorrect: "çalıçırpı" },
+            { correct: "çarçur", incorrect: "çarcur" },
+            { correct: "çekidüzen", incorrect: "çeki düzen" },
+            { correct: "çevre yolu", incorrect: "çevreyolu" },
+            { correct: "darmadağınık", incorrect: "darma dağınık" },
+            { correct: "deli dolu", incorrect: "delidolu" },
+            { correct: "denizaltı", incorrect: "deniz altı" },
+            { correct: "dinozor", incorrect: "dinazor" },
+            { correct: "direkt", incorrect: "direk" },
+            { correct: "doküman", incorrect: "döküman" },
+            { correct: "enstrüman", incorrect: "enstürman" },
+            { correct: "erozyon", incorrect: "erazyon" },
+            { correct: "espri", incorrect: "espiri" },
+            { correct: "etüt", incorrect: "etüd" },
+            { correct: "folklor", incorrect: "folklör" },
+            { correct: "gelgit", incorrect: "gel git" },
+            { correct: "gelişigüzel", incorrect: "gelişi güzel" },
+            { correct: "gitgide", incorrect: "git gide" },
+            { correct: "grup", incorrect: "gurup" },
+            { correct: "altyapı", incorrect: "alt yapı" },
+            { correct: "günbatımı", incorrect: "gün batımı" },
+            { correct: "günübirlik", incorrect: "günü birlik" },
+            { correct: "hafta sonu", incorrect: "haftasonu" },
+            { correct: "havaalanı", incorrect: "hava alanı" },
+            { correct: "hazırcevap", incorrect: "hazır cevap" },
+            { correct: "her biri", incorrect: "herbiri" },
+            { correct: "herkes", incorrect: "herkez" },
+            { correct: "heykeltıraş", incorrect: "heykeltraş" },
+            { correct: "her şey", incorrect: "herşey" },
+            { correct: "herhangi bir", incorrect: "herhangibir" },
+            { correct: "her ne kadar", incorrect: "her nekadar" },
+            { correct: "hiçbiri", incorrect: "hiç biri" },
+            { correct: "hiçbir", incorrect: "hiç bir" },
+            { correct: "hoparlör", incorrect: "hoparlor" },
+            { correct: "hoş geldin", incorrect: "hoşgeldin" },
+            { correct: "hoşgörü", incorrect: "hoş görü" },
+            { correct: "iade", incorrect: "iyade" },
+            { correct: "iddia", incorrect: "iddea" },
+            { correct: "iğne iplik", incorrect: "iğneiplik" },
+            { correct: "ilkokul", incorrect: "ilk okul" },
+            { correct: "ilkbahar", incorrect: "ilk bahar" },
+            { correct: "İlk Çağ", incorrect: "ilkçağ" },
+            { correct: "ilköğretim", incorrect: "ilk öğretim" },
+            { correct: "ilk yardım", incorrect: "ilkyardım" },
+            { correct: "illaki", incorrect: "ilaki" },
+            { correct: "iş yeri", incorrect: "işyeri" },
+            { correct: "jüri", incorrect: "juri" },
+            { correct: "kalemtıraş", incorrect: "kalemtraş" },
+            { correct: "kartpostal", incorrect: "kart postal" },
+            { correct: "alabalık", incorrect: "ala balık" },
+            { correct: "kastetmek", incorrect: "kasdetmek" },
+            { correct: "kıraathane", incorrect: "kırathane" },
+            { correct: "kılavuz", incorrect: "klavuz" },
+            { correct: "koleksiyon", incorrect: "kolleksiyon" },
+            { correct: "kolektif", incorrect: "kollektif" },
+            { correct: "kravat", incorrect: "kıravat" },
+            { correct: "maalesef", incorrect: "malesef" },
+            { correct: "mademki", incorrect: "madem ki" },
+            { correct: "mozaik", incorrect: "mozayik" },
+            { correct: "nüfus", incorrect: "nufus" },
+            { correct: "okuryazar", incorrect: "okur yazar" },
+            { correct: "olağanüstü", incorrect: "olağan üstü" },
+            { correct: "ola ki", incorrect: "olaki" },
+            { correct: "oysaki", incorrect: "oysa ki" },
+            { correct: "orijinal", incorrect: "orjinal" },
+            { correct: "Orta Çağ", incorrect: "Ortacağ" },
+            { correct: "ön söz", incorrect: "önsöz" },
+            { correct: "ön yargı", incorrect: "önyargı" },
+            { correct: "öz güven", incorrect: "özgüven" },
+            { correct: "paraşüt", incorrect: "paraşüd" },
+            { correct: "pastane", incorrect: "pastahane" },
+            { correct: "piramit", incorrect: "pramit" },
+            { correct: "rastgele", incorrect: "rasgele" },
+            { correct: "restoran", incorrect: "restorant" },
+            { correct: "ret", incorrect: "red" },
+            { correct: "röportaj", incorrect: "röpörtaj" },
+            { correct: "sömestir", incorrect: "sömestr" },
+            { correct: "sözüm ona", incorrect: "sözümona" },
+            { correct: "stad", incorrect: "stat" },
+            { correct: "stadyum", incorrect: "stadyom" },
+            { correct: "stajyer", incorrect: "stajer" },
+            { correct: "sürpriz", incorrect: "süpriz" },
+            { correct: "şarj", incorrect: "şarz" },
+            { correct: "tepetaklak", incorrect: "tepe taklak" },
+            { correct: "tiraj", incorrect: "traj" },
+            { correct: "tramvay", incorrect: "tranvay" },
+            { correct: "ulu orta", incorrect: "uluorta" },
+            { correct: "ünvan", incorrect: "unvan" },
+            { correct: "üstünkörü", incorrect: "üstün körü" },
+            { correct: "yakamoz", incorrect: "yakomoz" },
+            { correct: "yanı sıra", incorrect: "yanısırada" },
+            { correct: "yan yana", incorrect: "yanyana" },
+            { correct: "yeryüzü", incorrect: "yer yüzü" },
+            { correct: "yeşilimtırak", incorrect: "yeşıilimtrak" },
+            { correct: "yol ağzı", incorrect: "yolağzı" },
+            { correct: "yurt dışı", incorrect: "yurtdışı" },
+            { correct: "yükseköğrenim", incorrect: "yüksek öğrenim" },
+            { correct: "yüzyıl (asır)", incorrect: "yüz yıl (asır)" },
+            { correct: "zulüm", incorrect: "zülüm" },
+            { correct: "züccaciye", incorrect: "zücaciye" },
+            { correct: "zürafa", incorrect: "zurafa" },
+            { correct: "alt yazı", incorrect: "altyazı" },
+            { correct: "ana dil", incorrect: "anadil" },
+            { correct: "anekdot", incorrect: "anektod" },
+            { correct: "antrparantez", incorrect: "antiparantez" },
+            { correct: "arap sabunu", incorrect: "Arap sabunu" },
+            { correct: "arnavutciğeri", incorrect: "Arnavut ciğeri" },
+            { correct: "atardamar", incorrect: "atar damar" },
+            { correct: "atölye", incorrect: "atelye" },
+            { correct: "ayaküstü (görüştük)", incorrect: "ayak üstü( görüştük)" },
+            { correct: "babayiğit", incorrect: "baba yiğit" },
+            { correct: "bağ bozumu", incorrect: "bağbozumu" },
+            { correct: "bahçıvan", incorrect: "bahçevan" },
+            { correct: "başıboş", incorrect: "başı boş" },
+            { correct: "başıbozuk", incorrect: "başı bozuk" },
+            { correct: "belli başlı", incorrect: "bellibaşlı" },
+            { correct: "beyefendi", incorrect: "bey efendi" },
+            { correct: "hanımefendi", incorrect: "hanım efendi" },
+            { correct: "bilinçaltı", incorrect: "bilinç altı" },
+            { correct: "birdenbire", incorrect: "birden bire" },
+            { correct: "bitpazarı", incorrect: "bit pazarı" },
+            { correct: "boşboğaz", incorrect: "boş boğaz" },
+            { correct: "büyükbaş (hayvan)", incorrect: "büyük baş (hayvan)" },
+            { correct: "canciğer", incorrect: "can ciğer" },
+            { correct: "cankurtaran", incorrect: "can kurtaran" },
+            { correct: "çağ dışı", incorrect: "çağdışı" },
+            { correct: "sıra dışı", incorrect: "sıradışı" },
+            { correct: "çer çöp", incorrect: "çerçöp" },
+            { correct: "dershane", incorrect: "dersane" },
+            { correct: "deşarj", incorrect: "deşarz" },
+            { correct: "diktatör", incorrect: "dikdatör" },
+            { correct: "doludizgin", incorrect: "dolu dizgin" },
+            { correct: "dörtnala", incorrect: "dört nala" },
+            { correct: "günaşırı", incorrect: "gün aşırı" },
+            { correct: "suçiçeği", incorrect: "su çiçeği" },
+            { correct: "su böreği", incorrect: "suböreği" },
+            { correct: "hamam böceği", incorrect: "hamamböceği" },
+            { correct: "hıncahınç", incorrect: "hınca hınç" },
+            { correct: "hoşbeş etmek", incorrect: "hoş beş etmek" },
+            { correct: "kurdele", incorrect: "kurdelye" },
+            { correct: "kuş bakışı", incorrect: "kuş bakışı" },
+            { correct: "küsur (kadar)", incorrect: "küsür (kadar)" },
+            { correct: "laboratuvar", incorrect: "laboratuar" },
+            { correct: "maydanoz", incorrect: "maydonoz" },
+            { correct: "minibüs", incorrect: "münübüs" },
+            { correct: "müdafaa", incorrect: "müdafa" },
+            { correct: "müracaat", incorrect: "müracat" },
+            { correct: "müsaade", incorrect: "müsade" },
+            { correct: "müteahhit", incorrect: "mütahhit" },
+            { correct: "mütevazı", incorrect: "mütevazi" },
+            { correct: "örtbas", incorrect: "ört bas" },
+            { correct: "randıman", incorrect: "randman" },
+            { correct: "rötar", incorrect: "rotar" },
+            { correct: "rötuş", incorrect: "rötüş" },
+            { correct: "sağanak", incorrect: "sağnak" },
+            { correct: "saygıdeğer", incorrect: "saygı değer" },
+            { correct: "sezaryen", incorrect: "sezeryan" },
+            { correct: "sütliman", incorrect: "süt liman" },
+            { correct: "şofben", incorrect: "şohben" },
+            { correct: "şoför", incorrect: "şöför" },
+            { correct: "şoke olmak", incorrect: "şok olmak" },
+            { correct: "tan yeri", incorrect: "tan yeri" },
+            { correct: "tepetaklak", incorrect: "tepe taklak" },
+            { correct: "tıpatıp", incorrect: "tıpa tıp" },
+            { correct: "tribün", incorrect: "trübün" },
+            { correct: "turkuaz", incorrect: "turkuvaz" },
+            { correct: "üçkağıtçı", incorrect: "üç kağıtçı" },
+            { correct: "üst baş", incorrect: "üst baş" },
+            { correct: "üstünkörü", incorrect: "üstünkörü" },
+            { correct: "vaat", incorrect: "vaad" },
+            { correct: "vadetmek", incorrect: "vaadetmek" },
+            { correct: "vardiya", incorrect: "vardiye" },
+            { correct: "varsayım", incorrect: "var sayım" },
+            { correct: "vejetaryen", incorrect: "vejateryen" },
+            { correct: "yeryüzü", incorrect: "yer yüzü" },
+            { correct: "yıl dönümü", incorrect: "yıldönümü" },
+            { correct: "yüz akı", incorrect: "yüzakı" },
+            { correct: "yüzükoyun", incorrect: "yüzü koyun" },
+            { correct: "yüzüstü", incorrect: "yüz üstü" },
+            { correct: "zafiyet", incorrect: "zaafiyet" },
+            { correct: "zar zor", incorrect: "zarzor" },
+            { correct: "fark etmek", incorrect: "farketmek" },
+            { correct: "terk etmek", incorrect: "terketmek" },
+            { correct: "art arda", incorrect: "ardarda" },
+            { correct: "ayırt etmek", incorrect: "ayırdetmek" },
+            { correct: "zehir etmek", incorrect: "zehretmek" },
+            { correct: "darbetmek", incorrect: "darp etmek" },
+            { correct: "cezbetmek", incorrect: "cezp etmek" },
+            { correct: "ant içmek", incorrect: "and içmek" },
+            { correct: "katetmek", incorrect: "kat etmek" },
+            { correct: "hak etmek", incorrect: "hakketmek" },
+            { correct: "halletmek", incorrect: "hal etmek" },
+            { correct: "sevk etmek", incorrect: "sevketmek" },
+            { correct: "bağ evi", incorrect: "bağevi" },
+            { correct: "dağ evi", incorrect: "dağevi" },
+            { correct: "bozayı", incorrect: "boz ayı" },
+            { correct: "huzurevi", incorrect: "huzur evi" }
+        ];
+
+        // Quiz değişkenleri
+        let currentSet = 0;
+        let currentQuestion = 0;
+        let setScore = 0;
+        let overallScore = 0;
+        let totalQuestionsAnswered = 0;
+        let wrongAnswers = [];
+        let isRetryMode = false;
+        let currentWordSet = [];
+        let soundEnabled = true;
+        const QUESTIONS_PER_SET = 10;
+
+        // DOM elementleri
+        const homeScreen = document.getElementById('homeScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const setCompleted = document.getElementById('setCompleted');
+        const wordListScreen = document.getElementById('wordListScreen');
+        const startBtn = document.getElementById('startBtn');
+        const mainMenuBtn = document.getElementById('mainMenuBtn');
+        const soundBtn = document.getElementById('soundBtn');
+        const wordListBtn = document.getElementById('wordListBtn');
+        const backToListBtn = document.getElementById('backToListBtn');
+        const option1 = document.getElementById('option1');
+        const option2 = document.getElementById('option2');
+        const correctFeedback = document.getElementById('correctFeedback');
+        const incorrectFeedback = document.getElementById('incorrectFeedback');
+        const correctAnswerText = document.getElementById('correctAnswerText');
+        const currentSetElement = document.getElementById('currentSet');
+        const totalSetsElement = document.getElementById('totalSets');
+        const currentQuestionElement = document.getElementById('currentQuestion');
+        const totalQuestionsElement = document.getElementById('totalQuestions');
+        const currentScoreElement = document.getElementById('currentScore');
+        const currentTotalElement = document.getElementById('currentTotal');
+        const overallScoreElement = document.getElementById('overallScore');
+        const finalScoreElement = document.getElementById('finalScore');
+        const finalTotalElement = document.getElementById('finalTotal');
+        const finalOverallScoreElement = document.getElementById('finalOverallScore');
+        const setMessageElement = document.getElementById('setMessage');
+        const retryWrongBtn = document.getElementById('retryWrongBtn');
+        const nextSetBtn = document.getElementById('nextSetBtn');
+        const wordListContainer = document.getElementById('wordListContainer');
+
+        // Ses efektleri
+        function playCorrectSound() {
+            if (!soundEnabled) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+        
+        function playIncorrectSound() {
+            if (!soundEnabled) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.3);
+            
+            gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        // Başlangıç
+        function init() {
+            startBtn.addEventListener('click', startQuiz);
+            mainMenuBtn.addEventListener('click', goToMainMenu);
+            soundBtn.addEventListener('click', toggleSound);
+            wordListBtn.addEventListener('click', showWordList);
+            backToListBtn.addEventListener('click', goToMainMenu);
+            option1.addEventListener('click', () => checkAnswer(option1));
+            option2.addEventListener('click', () => checkAnswer(option2));
+            retryWrongBtn.addEventListener('click', retryWrongAnswers);
+            nextSetBtn.addEventListener('click', nextSet);
+            
+            const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
+            totalSetsElement.textContent = totalSets;
+        }
+
+        // Ses aç/kapa
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                soundBtn.innerHTML = '<span class="sound-icon">🔊</span> Ses Açık';
+                soundBtn.style.background = '#e67e22';
+            } else {
+                soundBtn.innerHTML = '<span class="sound-icon">🔇</span> Ses Kapalı';
+                soundBtn.style.background = '#95a5a6';
+            }
+        }
+
+        // Kelime listesini göster
+        function showWordList() {
+            homeScreen.style.display = 'none';
+            quizScreen.style.display = 'none';
+            setCompleted.style.display = 'none';
+            wordListScreen.style.display = 'block';
+            
+            const sortedWords = wordPairs
+                .map(pair => pair.correct)
+                .sort((a, b) => a.localeCompare(b, 'tr'));
+            
+            wordListContainer.innerHTML = '';
+            sortedWords.forEach(word => {
+                const wordItem = document.createElement('div');
+                wordItem.className = 'word-item';
+                wordItem.textContent = word;
+                wordListContainer.appendChild(wordItem);
+            });
+        }
+
+        // Quiz'i başlat
+        function startQuiz() {
+            homeScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            setCompleted.style.display = 'none';
+            wordListScreen.style.display = 'none';
+            
+            currentSet = 0;
+            overallScore = 0;
+            setScore = 0;
+            totalQuestionsAnswered = 0;
+            wrongAnswers = [];
+            isRetryMode = false;
+            
+            loadSet();
+        }
+
+        // YENİ MANTIK: Set yükle - her soruda farklı iki kelime
+        function loadSet() {
+            currentWordSet = [];
+
+            if (isRetryMode) {
+                currentWordSet = [...wrongAnswers];
+                totalQuestionsElement.textContent = currentWordSet.length;
+                currentTotalElement.textContent = currentWordSet.length;
+            } else {
+                // Tüm doğru ve yanlış kelimeleri ayrı listelere ayır
+                const allCorrectWords = wordPairs.map(pair => pair.correct);
+                const allIncorrectWords = wordPairs.map(pair => pair.incorrect);
+                
+                for (let i = 0; i < QUESTIONS_PER_SET; i++) {
+                    // Rastgele bir doğru kelime seç
+                    const randomCorrectIndex = Math.floor(Math.random() * allCorrectWords.length);
+                    const correctWord = allCorrectWords[randomCorrectIndex];
+                    
+                    // Rastgele bir yanlış kelime seç
+                    const randomIncorrectIndex = Math.floor(Math.random() * allIncorrectWords.length);
+                    const incorrectWord = allIncorrectWords[randomIncorrectIndex];
+                    
+                    // Kelimelerin rastgele sıralanması
+                    const randomOrder = Math.random() < 0.5;
+                    
+                    let option1Word, option2Word, correctOption;
+                    
+                    if (randomOrder) {
+                        option1Word = correctWord;
+                        option2Word = incorrectWord;
+                        correctOption = 1;
+                    } else {
+                        option1Word = incorrectWord;
+                        option2Word = correctWord;
+                        correctOption = 2;
+                    }
+                    
+                    currentWordSet.push({
+                        option1: option1Word,
+                        option2: option2Word,
+                        correctOption: correctOption,
+                        correctWord: correctWord
+                    });
+                }
+                totalQuestionsElement.textContent = currentWordSet.length;
+                currentTotalElement.textContent = currentWordSet.length;
+            }
+            
+            currentQuestion = 0;
+            setScore = 0;
+            currentSetElement.textContent = currentSet + 1;
+            currentScoreElement.textContent = setScore;
+            overallScoreElement.textContent = overallScore;
+            
+            showQuestion();
+        }
+
+        // Soruyu göster
+        function showQuestion() {
+            if (currentQuestion >= currentWordSet.length) {
+                endSet();
+                return;
+            }
+            
+            const currentQ = currentWordSet[currentQuestion];
+            currentQuestionElement.textContent = currentQuestion + 1;
+            
+            option1.textContent = currentQ.option1;
+            option2.textContent = currentQ.option2;
+            
+            option1.dataset.correct = (currentQ.correctOption === 1).toString();
+            option2.dataset.correct = (currentQ.correctOption === 2).toString();
+            
+            option1.className = "option";
+            option2.className = "option";
+            correctFeedback.style.display = "none";
+            incorrectFeedback.style.display = "none";
+        }
+
+        // Cevabı kontrol et
+        function checkAnswer(selectedOption) {
+            const isCorrect = selectedOption.dataset.correct === "true";
+            
+            if (isCorrect) {
+                selectedOption.classList.add("correct");
+                correctFeedback.style.display = "block";
+                setScore++;
+                overallScore++;
+                totalQuestionsAnswered++;
+                playCorrectSound();
+            } else {
+                selectedOption.classList.add("incorrect");
+                incorrectFeedback.style.display = "block";
+                correctAnswerText.textContent = currentWordSet[currentQuestion].correctWord;
+                
+                if (!isRetryMode) {
+                    wrongAnswers.push(currentWordSet[currentQuestion]);
+                }
+                
+                totalQuestionsAnswered++;
+                playIncorrectSound();
+            }
+            
+            if (option1.dataset.correct === "true") {
+                option1.classList.add("correct");
+            } else {
+                option2.classList.add("correct");
+            }
+            
+            currentScoreElement.textContent = setScore;
+            overallScoreElement.textContent = overallScore;
+            
+            setTimeout(() => {
+                currentQuestion++;
+                showQuestion();
+            }, 1500);
+        }
+
+        // Set'i bitir
+        function endSet() {
+            quizScreen.style.display = "none";
+            setCompleted.style.display = "block";
+            
+            finalScoreElement.textContent = setScore;
+            finalTotalElement.textContent = currentWordSet.length;
+            finalOverallScoreElement.textContent = overallScore;
+            
+            if (isRetryMode) {
+                setMessageElement.textContent = "Yanlış cevaplarınızı tekrar çözdünüz!";
+                nextSetBtn.textContent = "Sonraki Set";
+            } else {
+                if (wrongAnswers.length === 0) {
+                    setMessageElement.textContent = "Tebrikler! Tüm soruları doğru cevapladınız!";
+                } else {
+                    setMessageElement.textContent = `${wrongAnswers.length} soruyu yanlış cevapladınız. Yanlışlarınızı tekrar çözmek ister misiniz?`;
+                }
+                nextSetBtn.textContent = "Sonraki Set";
+            }
+            
+            const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
+            if (currentSet >= totalSets - 1 && !isRetryMode) {
+                nextSetBtn.textContent = "Quiz'i Bitir";
+            }
+            
+            if (wrongAnswers.length === 0 || isRetryMode) {
+                retryWrongBtn.style.display = "none";
+            } else {
+                retryWrongBtn.style.display = "block";
+            }
+        }
+
+        // Yanlış cevapları tekrar çöz
+        function retryWrongAnswers() {
+            isRetryMode = true;
+            setCompleted.style.display = "none";
+            quizScreen.style.display = "block";
+            loadSet();
+        }
+
+        // Sonraki set
+        function nextSet() {
+            if (isRetryMode) {
+                isRetryMode = false;
+                wrongAnswers = [];
+            } else {
+                currentSet++;
+            }
+            
+            const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
+            if (currentSet >= totalSets) {
+                alert(`Tebrikler! Quiz tamamlandı.\nToplam Skor: ${overallScore} doğru / ${totalQuestionsAnswered} soru`);
+                goToMainMenu();
+                return;
+            }
+            
+            setCompleted.style.display = "none";
+            quizScreen.style.display = "block";
+            loadSet();
+        }
+
+        // Ana menüye dön
+        function goToMainMenu() {
+            homeScreen.style.display = "block";
+            quizScreen.style.display = "none";
+            setCompleted.style.display = "none";
+            wordListScreen.style.display = "none";
+        }
+
+        // Uygulamayı başlat
+        init();
+    </script>
+</body>
+</html>
