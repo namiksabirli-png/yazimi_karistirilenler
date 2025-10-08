@@ -11,13 +11,11 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -26,7 +24,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-
         .header {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
@@ -37,12 +34,10 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .header-buttons {
             display: flex;
             gap: 10px;
         }
-
         .header-btn {
             background: rgba(255,255,255,0.2);
             color: white;
@@ -54,37 +49,29 @@
             transition: all 0.3s;
             backdrop-filter: blur(10px);
         }
-
         .header-btn:hover {
             background: rgba(255,255,255,0.3);
             transform: scale(1.05);
         }
-
         .sound-btn {
             background: #e67e22;
         }
-
         .sound-btn:hover {
             background: #d35400;
         }
-
         .main-menu-btn {
             background: #e74c3c;
         }
-
         .main-menu-btn:hover {
             background: #c0392b;
         }
-
         h1 {
             font-size: 2em;
             margin-bottom: 10px;
         }
-
         .quiz-container {
             padding: 30px;
         }
-
         .progress {
             display: flex;
             justify-content: space-between;
@@ -93,32 +80,27 @@
             padding: 10px;
             border-radius: 10px;
         }
-
         .progress-item {
             text-align: center;
             font-weight: bold;
             color: #2c3e50;
         }
-
         .question-container {
             text-align: center;
             margin-bottom: 30px;
         }
-
         .question {
             font-size: 1.5em;
             color: #2c3e50;
             margin-bottom: 25px;
             font-weight: 600;
         }
-
         .options-container {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-bottom: 30px;
         }
-
         .option {
             flex: 1;
             padding: 20px;
@@ -136,25 +118,21 @@
             justify-content: center;
             text-align: center;
         }
-
         .option:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-color: #3498db;
         }
-
         .correct {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
             border-color: #27ae60;
         }
-
         .incorrect {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
             border-color: #c0392b;
         }
-
         .feedback {
             padding: 15px;
             border-radius: 10px;
@@ -163,19 +141,16 @@
             font-weight: bold;
             display: none;
         }
-
         .correct-feedback {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-
         .incorrect-feedback {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-
         .score-container {
             text-align: center;
             font-size: 1.2em;
@@ -183,32 +158,27 @@
             color: #2c3e50;
             margin-bottom: 20px;
         }
-
         .set-completed {
             text-align: center;
             padding: 30px;
             display: none;
         }
-
         .final-score {
             font-size: 2em;
             color: #2c3e50;
             margin: 20px 0;
         }
-
         .total-score {
             font-size: 1.5em;
             color: #3498db;
             margin: 15px 0;
         }
-
         .buttons-container {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 30px;
         }
-
         .btn {
             padding: 12px 25px;
             border: none;
@@ -218,27 +188,22 @@
             font-weight: bold;
             transition: all 0.3s;
         }
-
         .retry-btn {
             background: linear-gradient(135deg, #e67e22, #d35400);
             color: white;
         }
-
         .next-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
         }
-
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
         .home-screen {
             text-align: center;
             padding: 40px 20px;
         }
-
         .home-buttons {
             display: flex;
             flex-direction: column;
@@ -246,7 +211,6 @@
             max-width: 300px;
             margin: 30px auto;
         }
-
         .home-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
@@ -258,16 +222,13 @@
             font-weight: bold;
             transition: all 0.3s;
         }
-
         .home-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-
         .word-list-btn {
             background: linear-gradient(135deg, #9b59b6, #8e44ad);
         }
-
         .instructions {
             background: #f8f9fa;
             padding: 20px;
@@ -275,43 +236,35 @@
             margin: 20px 0;
             text-align: left;
         }
-
         .instructions h3 {
             color: #2c3e50;
             margin-bottom: 10px;
         }
-
         .instructions ul {
             padding-left: 20px;
         }
-
         .instructions li {
             margin-bottom: 8px;
             color: #34495e;
         }
-
         .sound-icon {
             margin-right: 5px;
         }
-
         /* Kelime Listesi Stilleri */
         .word-list-screen {
             padding: 20px;
             display: none;
         }
-
         .word-list-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
-
         .word-list-title {
             color: #2c3e50;
             font-size: 1.8em;
         }
-
         .word-list-container {
             max-height: 500px;
             overflow-y: auto;
@@ -320,13 +273,11 @@
             padding: 15px;
             background: #f8f9fa;
         }
-
         .word-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 10px;
         }
-
         .word-item {
             padding: 10px 15px;
             background: white;
@@ -335,7 +286,6 @@
             font-weight: 500;
             color: #2c3e50;
         }
-
         .back-btn {
             background: #95a5a6;
             color: white;
@@ -346,7 +296,6 @@
             font-weight: bold;
             transition: all 0.3s;
         }
-
         .back-btn:hover {
             background: #7f8c8d;
             transform: scale(1.05);
@@ -369,7 +318,6 @@
                 </button>
             </div>
         </div>
-
         <div class="quiz-container" id="quizContainer">
             <!-- Home Screen -->
             <div class="home-screen" id="homeScreen">
@@ -391,7 +339,6 @@
                     <button class="home-btn word-list-btn" id="wordListBtn">📚 Kelime Çalışma Tablosu</button>
                 </div>
             </div>
-
             <!-- Quiz Screen -->
             <div id="quizScreen" style="display: none;">
                 <div class="progress">
@@ -399,7 +346,6 @@
                     <div class="progress-item">Soru: <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></div>
                     <div class="progress-item">Set Skoru: <span id="currentScore">0</span>/<span id="currentTotal">10</span></div>
                 </div>
-
                 <div class="question-container">
                     <div class="question" id="questionText">Hangisi doğru yazılmış?</div>
                     <div class="options-container">
@@ -407,19 +353,16 @@
                         <div class="option" id="option2"></div>
                     </div>
                 </div>
-
                 <div class="feedback correct-feedback" id="correctFeedback">
                     ✓ Doğru! Tebrikler!
                 </div>
                 <div class="feedback incorrect-feedback" id="incorrectFeedback">
                     ✗ Yanlış! Doğrusu: <span id="correctAnswerText"></span>
                 </div>
-
                 <div class="score-container">
                     Toplam Skor: <span id="overallScore">0</span> doğru
                 </div>
             </div>
-
             <!-- Set Completed Screen -->
             <div class="set-completed" id="setCompleted">
                 <h2>Set Tamamlandı!</h2>
@@ -435,7 +378,6 @@
                     <button class="btn next-btn" id="nextSetBtn">Sonraki Set</button>
                 </div>
             </div>
-
             <!-- Kelime Listesi Ekranı -->
             <div class="word-list-screen" id="wordListScreen">
                 <div class="word-list-header">
@@ -451,9 +393,8 @@
             </div>
         </div>
     </div>
-
     <script>
-        // Güncellenmiş 320 kelimelik liste
+        // Güncellenmiş 320+ kelimelik liste
         const wordPairs = [
             { correct: "absürt", incorrect: "absürd" },
             { correct: "abur cubur", incorrect: "aburcubur" },
@@ -702,26 +643,25 @@
             { correct: "bağ evi", incorrect: "bağevi" },
             { correct: "dağ evi", incorrect: "dağevi" },
             { correct: "bozayı", incorrect: "boz ayı" },
-            { correct: "huzurevi", incorrect: "huzur evi" }
+            { correct: "huzurevi", incorrect: "huzur evi" },  // 👈 BU SATIRIN SONUNA VİRGÜL EKLENDİ
             { correct: "eşkal", incorrect: "eşgal" },
             { correct: "kavonoz", incorrect: "kavanoz" },
             { correct: "parlemento", incorrect: "parlamento" },
             { correct: "rezarvasyon", incorrect: "rezervasyon" },
-            { correct: "yarım ada", incorrect: "yarımada" },
+            { correct: "yarımada", incorrect: "yarım ada" },
             { correct: "tabii ki", incorrect: "tabiiki" },
             { correct: "illaki", incorrect: "illa ki" },
             { correct: "oysaki", incorrect: "oysa ki" },
             { correct: "Kuzey Kutbu", incorrect: "kuzey kutbu" },
             { correct: "karmakarışık", incorrect: "karma karışık" },
-            { correct: "saçma sapan", incorrect: " saçmasapan " },
+            { correct: "saçma sapan", incorrect: "saçmasapan" },
             { correct: "sıradağlar", incorrect: "sıra dağlar" },
             { correct: "itfaiye", incorrect: "itfaye" },
             { correct: "menetmek", incorrect: "men etmek" },
             { correct: "vb.leri", incorrect: "vb.’leri" },
             { correct: "dizüstü (bilgisayar)", incorrect: "diz üstü (bilgisayar)" },
-            { correct: "Afrika kıtası", incorrect: "Afrika Kıtası" },
+            { correct: "Afrika kıtası", incorrect: "Afrika Kıtası" }
         ];
-
         // Quiz değişkenleri
         let currentSet = 0;
         let currentQuestion = 0;
@@ -733,7 +673,6 @@
         let currentWordSet = [];
         let soundEnabled = true;
         const QUESTIONS_PER_SET = 10;
-
         // DOM elementleri
         const homeScreen = document.getElementById('homeScreen');
         const quizScreen = document.getElementById('quizScreen');
@@ -763,48 +702,35 @@
         const retryWrongBtn = document.getElementById('retryWrongBtn');
         const nextSetBtn = document.getElementById('nextSetBtn');
         const wordListContainer = document.getElementById('wordListContainer');
-
         // Ses efektleri
         function playCorrectSound() {
             if (!soundEnabled) return;
-            
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
-            
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
-            
             oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
             oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
-            
             gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-            
             oscillator.start(audioContext.currentTime);
             oscillator.stop(audioContext.currentTime + 0.3);
         }
-        
         function playIncorrectSound() {
             if (!soundEnabled) return;
-            
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
-            
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
-            
             oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
             oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.3);
-            
             gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-            
             oscillator.start(audioContext.currentTime);
             oscillator.stop(audioContext.currentTime + 0.5);
         }
-
         // Başlangıç
         function init() {
             startBtn.addEventListener('click', startQuiz);
@@ -816,11 +742,9 @@
             option2.addEventListener('click', () => checkAnswer(option2));
             retryWrongBtn.addEventListener('click', retryWrongAnswers);
             nextSetBtn.addEventListener('click', nextSet);
-            
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             totalSetsElement.textContent = totalSets;
         }
-
         // Ses aç/kapa
         function toggleSound() {
             soundEnabled = !soundEnabled;
@@ -832,18 +756,15 @@
                 soundBtn.style.background = '#95a5a6';
             }
         }
-
         // Kelime listesini göster
         function showWordList() {
             homeScreen.style.display = 'none';
             quizScreen.style.display = 'none';
             setCompleted.style.display = 'none';
             wordListScreen.style.display = 'block';
-            
             const sortedWords = wordPairs
                 .map(pair => pair.correct)
                 .sort((a, b) => a.localeCompare(b, 'tr'));
-            
             wordListContainer.innerHTML = '';
             sortedWords.forEach(word => {
                 const wordItem = document.createElement('div');
@@ -852,28 +773,23 @@
                 wordListContainer.appendChild(wordItem);
             });
         }
-
         // Quiz'i başlat
         function startQuiz() {
             homeScreen.style.display = 'none';
             quizScreen.style.display = 'block';
             setCompleted.style.display = 'none';
             wordListScreen.style.display = 'none';
-            
             currentSet = 0;
             overallScore = 0;
             setScore = 0;
             totalQuestionsAnswered = 0;
             wrongAnswers = [];
             isRetryMode = false;
-            
             loadSet();
         }
-
         // YENİ MANTIK: Set yükle - her soruda farklı iki kelime
         function loadSet() {
             currentWordSet = [];
-
             if (isRetryMode) {
                 currentWordSet = [...wrongAnswers];
                 totalQuestionsElement.textContent = currentWordSet.length;
@@ -882,21 +798,16 @@
                 // Tüm doğru ve yanlış kelimeleri ayrı listelere ayır
                 const allCorrectWords = wordPairs.map(pair => pair.correct);
                 const allIncorrectWords = wordPairs.map(pair => pair.incorrect);
-                
                 for (let i = 0; i < QUESTIONS_PER_SET; i++) {
                     // Rastgele bir doğru kelime seç
                     const randomCorrectIndex = Math.floor(Math.random() * allCorrectWords.length);
                     const correctWord = allCorrectWords[randomCorrectIndex];
-                    
                     // Rastgele bir yanlış kelime seç
                     const randomIncorrectIndex = Math.floor(Math.random() * allIncorrectWords.length);
                     const incorrectWord = allIncorrectWords[randomIncorrectIndex];
-                    
                     // Kelimelerin rastgele sıralanması
                     const randomOrder = Math.random() < 0.5;
-                    
                     let option1Word, option2Word, correctOption;
-                    
                     if (randomOrder) {
                         option1Word = correctWord;
                         option2Word = incorrectWord;
@@ -906,7 +817,6 @@
                         option2Word = correctWord;
                         correctOption = 2;
                     }
-                    
                     currentWordSet.push({
                         option1: option1Word,
                         option2: option2Word,
@@ -917,42 +827,33 @@
                 totalQuestionsElement.textContent = currentWordSet.length;
                 currentTotalElement.textContent = currentWordSet.length;
             }
-            
             currentQuestion = 0;
             setScore = 0;
             currentSetElement.textContent = currentSet + 1;
             currentScoreElement.textContent = setScore;
             overallScoreElement.textContent = overallScore;
-            
             showQuestion();
         }
-
         // Soruyu göster
         function showQuestion() {
             if (currentQuestion >= currentWordSet.length) {
                 endSet();
                 return;
             }
-            
             const currentQ = currentWordSet[currentQuestion];
             currentQuestionElement.textContent = currentQuestion + 1;
-            
             option1.textContent = currentQ.option1;
             option2.textContent = currentQ.option2;
-            
             option1.dataset.correct = (currentQ.correctOption === 1).toString();
             option2.dataset.correct = (currentQ.correctOption === 2).toString();
-            
             option1.className = "option";
             option2.className = "option";
             correctFeedback.style.display = "none";
             incorrectFeedback.style.display = "none";
         }
-
         // Cevabı kontrol et
         function checkAnswer(selectedOption) {
             const isCorrect = selectedOption.dataset.correct === "true";
-            
             if (isCorrect) {
                 selectedOption.classList.add("correct");
                 correctFeedback.style.display = "block";
@@ -964,39 +865,31 @@
                 selectedOption.classList.add("incorrect");
                 incorrectFeedback.style.display = "block";
                 correctAnswerText.textContent = currentWordSet[currentQuestion].correctWord;
-                
                 if (!isRetryMode) {
                     wrongAnswers.push(currentWordSet[currentQuestion]);
                 }
-                
                 totalQuestionsAnswered++;
                 playIncorrectSound();
             }
-            
             if (option1.dataset.correct === "true") {
                 option1.classList.add("correct");
             } else {
                 option2.classList.add("correct");
             }
-            
             currentScoreElement.textContent = setScore;
             overallScoreElement.textContent = overallScore;
-            
             setTimeout(() => {
                 currentQuestion++;
                 showQuestion();
             }, 1500);
         }
-
         // Set'i bitir
         function endSet() {
             quizScreen.style.display = "none";
             setCompleted.style.display = "block";
-            
             finalScoreElement.textContent = setScore;
             finalTotalElement.textContent = currentWordSet.length;
             finalOverallScoreElement.textContent = overallScore;
-            
             if (isRetryMode) {
                 setMessageElement.textContent = "Yanlış cevaplarınızı tekrar çözdünüz!";
                 nextSetBtn.textContent = "Sonraki Set";
@@ -1008,19 +901,16 @@
                 }
                 nextSetBtn.textContent = "Sonraki Set";
             }
-            
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets - 1 && !isRetryMode) {
                 nextSetBtn.textContent = "Quiz'i Bitir";
             }
-            
             if (wrongAnswers.length === 0 || isRetryMode) {
                 retryWrongBtn.style.display = "none";
             } else {
                 retryWrongBtn.style.display = "block";
             }
         }
-
         // Yanlış cevapları tekrar çöz
         function retryWrongAnswers() {
             isRetryMode = true;
@@ -1028,7 +918,6 @@
             quizScreen.style.display = "block";
             loadSet();
         }
-
         // Sonraki set
         function nextSet() {
             if (isRetryMode) {
@@ -1037,19 +926,16 @@
             } else {
                 currentSet++;
             }
-            
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets) {
                 alert(`Tebrikler! Quiz tamamlandı.\nToplam Skor: ${overallScore} doğru / ${totalQuestionsAnswered} soru`);
                 goToMainMenu();
                 return;
             }
-            
             setCompleted.style.display = "none";
             quizScreen.style.display = "block";
             loadSet();
         }
-
         // Ana menüye dön
         function goToMainMenu() {
             homeScreen.style.display = "block";
@@ -1057,7 +943,6 @@
             setCompleted.style.display = "none";
             wordListScreen.style.display = "none";
         }
-
         // Uygulamayı başlat
         init();
     </script>
