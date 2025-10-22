@@ -303,14 +303,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
+     <div class="container">
         <div class="header">
             <div class="header-buttons">
                 <button class="header-btn main-menu-btn" id="mainMenuBtn">🏠 Ana Sayfa</button>
             </div>
             <div>
-                <h1>Yazım Yanlışı Quiz</h1>
-                <p>Hangisi doğru yazılmış?</p>
+                <h1>YAZIMI KARIŞTIRILAN SÖZCÜKLER</h1>
+                <p>"Hangisi doğru yazılmış?"</p>
             </div>
             <div class="header-buttons">
                 <button class="header-btn sound-btn" id="soundBtn">
@@ -319,23 +319,22 @@
             </div>
         </div>
         <div class="quiz-container" id="quizContainer">
-            <!-- Home Screen -->
             <div class="home-screen" id="homeScreen">
-                <h2>Yazım Kılavuzu Quiz'e Hoş Geldiniz!</h2>
+                <h2>"Yazım Bilgisi Mini Alıştırması"na Hoş Geldiniz!</h2>
                 <div class="instructions">
                     <h3>Nasıl Oynanır:</h3>
                     <ul>
-                        <li>Her soruda iki farklı kelime göreceksiniz - biri doğru, diğeri yanlış yazılmış</li>
-                        <li>Doğru yazılmış olanı seçin</li>
-                        <li>Doğru cevap verirseniz mavi renk ve "ding" sesi duyacaksınız</li>
-                        <li>Yanlış cevap verirseniz kırmızı renk ve "dong" sesi duyacaksınız</li>
-                        <li>Her set 10 sorudan oluşur</li>
-                        <li>Set sonunda yanlış cevaplarınızı tekrar çözebilirsiniz</li>
-                        <li>Üstteki ses butonu ile sesi açıp kapatabilirsiniz</li>
+                        <li>Her soruda biri doğru, diğeri yanlış yazılmış iki kelime göreceksiniz.</li>
+                        <li>Doğru yazılmış olanı seçin.</li>
+                        <li>Doğru cevap verirseniz mavi renk görecek ve "ding" sesi duyacaksınız.</li>
+                        <li>Yanlış cevap verirseniz kırmızı renk görecek ve "dong" sesi duyacaksınız.</li>
+                        <li>Her set 10 sorudan oluşur.</li>
+                        <li>Set sonunda yanlış cevaplarınızı tekrar çözebilirsiniz.</li>
+                        <li>Üstteki ses butonu ile sesi açıp kapatabilirsiniz.</li>
                     </ul>
                 </div>
                 <div class="home-buttons">
-                    <button class="home-btn" id="startBtn">QUIZ'E BAŞLA</button>
+                    <button class="home-btn" id="startBtn">ALIŞTIRMAYA BAŞLA</button>
                     <button class="home-btn word-list-btn" id="wordListBtn">📚 Kelime Çalışma Tablosu</button>
                 </div>
             </div>
@@ -396,7 +395,7 @@
     <script>
         // Güncellenmiş 320+ kelimelik liste
         const wordPairs = [
-            { correct: "absürt", incorrect: "absürd" },
+             { correct: "absürt", incorrect: "absürd" },
             { correct: "abur cubur", incorrect: "aburcubur" },
             { correct: "acayip", incorrect: "acaib" },
             { correct: "açık büfe", incorrect: "açıkbüfe" },
@@ -440,7 +439,6 @@
             { correct: "birtakım", incorrect: "bir takım" },
             { correct: "blok", incorrect: "bilok" },
             { correct: "boşboğaz", incorrect: "boş boğaz" },
-            { correct: "boylu boslu", incorrect: "boyluboslu" },
             { correct: "buz dağı", incorrect: "buzdağı" },
             { correct: "Buzul Çağı", incorrect: "Buzulçağı" },
             { correct: "canı tez", incorrect: "canıtez" },
@@ -483,7 +481,7 @@
             { correct: "hoparlör", incorrect: "hoparlor" },
             { correct: "hoş geldin", incorrect: "hoşgeldin" },
             { correct: "hoşgörü", incorrect: "hoş görü" },
-            { correct: "iade", incorrect: "iyade" },
+            { correct: "faaliyet", incorrect: "faliyet" },
             { correct: "iddia", incorrect: "iddea" },
             { correct: "iğne iplik", incorrect: "iğneiplik" },
             { correct: "ilkokul", incorrect: "ilk okul" },
@@ -519,13 +517,13 @@
             { correct: "paraşüt", incorrect: "paraşüd" },
             { correct: "pastane", incorrect: "pastahane" },
             { correct: "piramit", incorrect: "pramit" },
-            { correct: "rastgele", incorrect: "rasgele" },
+            { correct: "rastgele (gelişigüzel)", incorrect: "rasgele (gelişigüzel)" },
             { correct: "restoran", incorrect: "restorant" },
             { correct: "ret", incorrect: "red" },
             { correct: "röportaj", incorrect: "röpörtaj" },
             { correct: "sömestir", incorrect: "sömestr" },
             { correct: "sözüm ona", incorrect: "sözümona" },
-            { correct: "stad", incorrect: "stat" },
+            { correct: "stat", incorrect: "stad" },
             { correct: "stadyum", incorrect: "stadyom" },
             { correct: "stajyer", incorrect: "stajer" },
             { correct: "sürpriz", incorrect: "süpriz" },
@@ -537,7 +535,7 @@
             { correct: "ünvan", incorrect: "unvan" },
             { correct: "üstünkörü", incorrect: "üstün körü" },
             { correct: "yakamoz", incorrect: "yakomoz" },
-            { correct: "yanı sıra", incorrect: "yanısıra" },
+            { correct: "yanı sıra", incorrect: "yanı sıra" },
             { correct: "yan yana", incorrect: "yanyana" },
             { correct: "yeryüzü", incorrect: "yer yüzü" },
             { correct: "yeşilimtırak", incorrect: "yeşıilimtrak" },
@@ -572,7 +570,6 @@
             { correct: "büyükbaş (hayvan)", incorrect: "büyük baş (hayvan)" },
             { correct: "canciğer", incorrect: "can ciğer" },
             { correct: "cankurtaran", incorrect: "can kurtaran" },
-            { correct: "çağ dışı", incorrect: "çağdışı" },
             { correct: "sıra dışı", incorrect: "sıradışı" },
             { correct: "çer çöp", incorrect: "çerçöp" },
             { correct: "dershane", incorrect: "dersane" },
@@ -613,15 +610,13 @@
             { correct: "tıpatıp", incorrect: "tıpa tıp" },
             { correct: "tribün", incorrect: "trübün" },
             { correct: "turkuaz", incorrect: "turkuvaz" },
-            { correct: "üçkağıtçı", incorrect: "üç kağıtçı" },
+            { correct: "üçkâğıtçı", incorrect: "üç kâğıtçı" },
             { correct: "üst baş", incorrect: "üst baş" },
-            { correct: "üstünkörü", incorrect: "üstünkörü" },
             { correct: "vaat", incorrect: "vaad" },
             { correct: "vadetmek", incorrect: "vaadetmek" },
             { correct: "vardiya", incorrect: "vardiye" },
             { correct: "varsayım", incorrect: "var sayım" },
             { correct: "vejetaryen", incorrect: "vejateryen" },
-            { correct: "yeryüzü", incorrect: "yer yüzü" },
             { correct: "yıl dönümü", incorrect: "yıldönümü" },
             { correct: "yüz akı", incorrect: "yüzakı" },
             { correct: "yüzükoyun", incorrect: "yüzü koyun" },
@@ -632,7 +627,7 @@
             { correct: "terk etmek", incorrect: "terketmek" },
             { correct: "art arda", incorrect: "ardarda" },
             { correct: "ayırt etmek", incorrect: "ayırdetmek" },
-            { correct: "zehir etmek", incorrect: "zehretmek" },
+            { correct: "zehretmek", incorrect: "zehir etmek" },
             { correct: "darbetmek", incorrect: "darp etmek" },
             { correct: "cezbetmek", incorrect: "cezp etmek" },
             { correct: "ant içmek", incorrect: "and içmek" },
@@ -644,23 +639,21 @@
             { correct: "dağ evi", incorrect: "dağevi" },
             { correct: "bozayı", incorrect: "boz ayı" },
             { correct: "huzurevi", incorrect: "huzur evi" },  // 👈 BU SATIRIN SONUNA VİRGÜL EKLENDİ
-            { correct: "eşkal", incorrect: "eşgal" },
+            { correct: "eşkâl", incorrect: "eşgal" },
             { correct: "kavanoz", incorrect: "kavonoz" },
-            { correct: "parlemento", incorrect: "parlamento" },
-            { correct: "rezarvasyon", incorrect: "rezervasyon" },
+            { correct: "parlamento", incorrect: "parlemento" },
+            { correct: "rezervasyon", incorrect: "rezarvasyon" },
             { correct: "yarımada", incorrect: "yarım ada" },
             { correct: "tabii ki", incorrect: "tabiiki" },
-            { correct: "oysaki", incorrect: "oysa ki" },
             { correct: "Kuzey Kutbu", incorrect: "kuzey kutbu" },
             { correct: "karmakarışık", incorrect: "karma karışık" },
             { correct: "saçma sapan", incorrect: "saçmasapan" },
             { correct: "sıradağlar", incorrect: "sıra dağlar" },
             { correct: "itfaiye", incorrect: "itfaye" },
-            { correct: "faaliyet", incorrect: "faliyet" },
             { correct: "menetmek", incorrect: "men etmek" },
             { correct: "vb.leri", incorrect: "vb.’leri" },
             { correct: "dizüstü (bilgisayar)", incorrect: "diz üstü (bilgisayar)" },
-            { correct: "Afrika kıtası", incorrect: "Afrika Kıtası" }
+            { correct: "Afrika kıtası", incorrect: "Afrika Kıtası"}
         ];
         // Quiz değişkenleri
         let currentSet = 0;
@@ -903,7 +896,7 @@
             }
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets - 1 && !isRetryMode) {
-                nextSetBtn.textContent = "Quiz'i Bitir";
+                nextSetBtn.textContent = "Alıştırmayı Bitir";
             }
             if (wrongAnswers.length === 0 || isRetryMode) {
                 retryWrongBtn.style.display = "none";
@@ -928,7 +921,7 @@
             }
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets) {
-                alert(`Tebrikler! Quiz tamamlandı.\nToplam Skor: ${overallScore} doğru / ${totalQuestionsAnswered} soru`);
+                alert(`Tebrikler! Alıştırma tamamlandı.\nToplam Skor: ${overallScore} doğru / ${totalQuestionsAnswered} soru`);
                 goToMainMenu();
                 return;
             }
