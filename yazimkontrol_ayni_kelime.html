@@ -873,7 +873,7 @@
             }
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets - 1 && !isRetryMode) {
-                nextSetBtn.textContent = ""Alıştırmayı Bitir";
+                nextSetBtn.textContent = "Alıştırmayı Bitir";
             }
             if (wrongAnswers.length === 0 || isRetryMode) {
                 retryWrongBtn.style.display = "none";
