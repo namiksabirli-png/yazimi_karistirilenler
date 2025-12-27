@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yazım Bilgisi Mini Alıştırma Uygulaması</title>
+    <title>Yazım Yanlışı Quiz Uygulaması</title>
     <style>
         * {
             box-sizing: border-box;
@@ -300,6 +300,56 @@
             background: #7f8c8d;
             transform: scale(1.05);
         }
+        /* Şifre Ekranı Stilleri */
+        .password-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .password-container {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .password-input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        .password-input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        .password-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .password-btn:hover {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            transform: translateY(-2px);
+        }
+        .password-error {
+            color: #e74c3c;
+            margin-top: 10px;
+            display: none;
+        }
+        .locked-content {
+            display: none;
+        }
+        .unlocked-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -319,8 +369,23 @@
             </div>
         </div>
         <div class="quiz-container" id="quizContainer">
+            <!-- Şifre Ekranı -->
+            <div class="password-screen" id="passwordScreen">
+                <h2>Uygulamaya Erişim</h2>
+                <p>Lütfen şifreyi giriniz:</p>
+                <div class="password-container">
+                    <input type="password" class="password-input" id="passwordInput" placeholder="Şifre">
+                    <button class="password-btn" id="passwordBtn">Şifreyi Gir</button>
+                    <div class="password-error" id="passwordError">Hatalı şifre! Lütfen tekrar deneyin.</div>
+                </div>
+                <div class="instructions">
+                    <h3>Not:</h3>
+                    <p>Şifre varsayılan olarak "9119" olarak ayarlanmıştır. HTML kodunu düzenleyerek şifreyi değiştirebilirsiniz.</p>
+                </div>
+            </div>
+            
             <!-- Ana Menü -->
-            <div class="home-screen" id="homeScreen">
+            <div class="home-screen locked-content" id="homeScreen">
                 <h2>"Yazım Bilgisi Mini Alıştırması"na Hoş Geldiniz!</h2>
                 <div class="instructions">
                     <h3>Nasıl Oynanır:</h3>
@@ -383,7 +448,7 @@
             </div>
 
             <!-- Kelime Listesi Ekranı -->
-            <div class="word-list-screen" id="wordListScreen">
+            <div class="word-list-screen locked-content" id="wordListScreen">
                 <div class="word-list-header">
                     <h2 class="word-list-title">📚 Kelime Çalışma Tablosu</h2>
                     <button class="back-btn" id="backToListBtn">← Geri</button>
@@ -397,8 +462,11 @@
     </div>
 
     <script>
+        // Şifre değişkeni - HTML içinde kolayca değiştirilebilir
+        const PASSWORD = "9119";
+        
         const wordPairs = [
-             { correct: "absürt", incorrect: "absürd" },
+            { correct: "absürt", incorrect: "absürd" },
             { correct: "abur cubur", incorrect: "aburcubur" },
             { correct: "acayip", incorrect: "acaib" },
             { correct: "açık büfe", incorrect: "açıkbüfe" },
@@ -449,7 +517,7 @@
             { correct: "çalakalem", incorrect: "çala kalem" },
             { correct: "çalar saat", incorrect: "çalarsaat" },
             { correct: "çalı çırpı", incorrect: "çalıçırpı" },
-            { correct: "çarçur", incorrect: "çar çur" },
+            { correct: "çarçur", incorrect: "çarcur" },
             { correct: "çekidüzen", incorrect: "çeki düzen" },
             { correct: "çevre yolu", incorrect: "çevreyolu" },
             { correct: "darmadağınık", incorrect: "darma dağınık" },
@@ -537,7 +605,7 @@
             { correct: "ünvan", incorrect: "unvan" },
             { correct: "üstünkörü", incorrect: "üstün körü" },
             { correct: "yakamoz", incorrect: "yakomoz" },
-            { correct: "yanı sıra", incorrect: "yanısıra" },
+            { correct: "yanı sıra", incorrect: "yanı sıra" },
             { correct: "yan yana", incorrect: "yanyana" },
             { correct: "yeryüzü", incorrect: "yer yüzü" },
             { correct: "yeşilimtırak", incorrect: "yeşıilimtrak" },
@@ -639,7 +707,7 @@
             { correct: "bağ evi", incorrect: "bağevi" },
             { correct: "dağ evi", incorrect: "dağevi" },
             { correct: "bozayı", incorrect: "boz ayı" },
-            { correct: "huzurevi", incorrect: "huzur evi" },  // 👈 BU SATIRIN SONUNA VİRGÜL EKLENDİ
+            { correct: "huzurevi", incorrect: "huzur evi" },
             { correct: "eşkâl", incorrect: "eşgal" },
             { correct: "kavanoz", incorrect: "kavonoz" },
             { correct: "parlamento", incorrect: "parlemento" },
@@ -652,6 +720,7 @@
             { correct: "sıradağlar", incorrect: "sıra dağlar" },
             { correct: "itfaiye", incorrect: "itfaye" },
             { correct: "menetmek", incorrect: "men etmek" },
+            { correct: "feyzalmak", incorrect: "feyiz almak" },
             { correct: "vb.leri", incorrect: "vb.’leri" },
             { correct: "dizüstü (bilgisayar)", incorrect: "diz üstü (bilgisayar)" },
             { correct: "Afrika kıtası", incorrect: "Afrika Kıtası"}
@@ -668,6 +737,8 @@
         let currentWordSet = [];
         let soundEnabled = true;
         let quizMode = 'same'; // 'same' veya 'diff'
+        let isUnlocked = false; // Şifre kontrolü için
+
         const QUESTIONS_PER_SET = 10;
 
         // DOM elementleri
@@ -675,6 +746,7 @@
         const quizScreen = document.getElementById('quizScreen');
         const setCompleted = document.getElementById('setCompleted');
         const wordListScreen = document.getElementById('wordListScreen');
+        const passwordScreen = document.getElementById('passwordScreen');
         const mainMenuBtn = document.getElementById('mainMenuBtn');
         const soundBtn = document.getElementById('soundBtn');
         const wordListBtn = document.getElementById('wordListBtn');
@@ -700,6 +772,9 @@
         const wordListContainer = document.getElementById('wordListContainer');
         const sameWordsBtn = document.getElementById('sameWordsBtn');
         const diffWordsBtn = document.getElementById('diffWordsBtn');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordBtn = document.getElementById('passwordBtn');
+        const passwordError = document.getElementById('passwordError');
 
         // Ses efektleri
         function playCorrectSound() {
@@ -734,6 +809,16 @@
 
         // Başlangıç
         function init() {
+            // Şifre ekranını göster
+            showPasswordScreen();
+            
+            passwordBtn.addEventListener('click', checkPassword);
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
             sameWordsBtn.addEventListener('click', () => startQuiz('same'));
             diffWordsBtn.addEventListener('click', () => startQuiz('diff'));
             mainMenuBtn.addEventListener('click', goToMainMenu);
@@ -744,11 +829,35 @@
             option2.addEventListener('click', () => checkAnswer(option2));
             retryWrongBtn.addEventListener('click', retryWrongAnswers);
             nextSetBtn.addEventListener('click', nextSet);
+
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             totalSetsElement.textContent = totalSets;
         }
 
+        function showPasswordScreen() {
+            passwordScreen.style.display = 'block';
+            homeScreen.style.display = 'none';
+            quizScreen.style.display = 'none';
+            setCompleted.style.display = 'none';
+            wordListScreen.style.display = 'none';
+        }
+
+        function checkPassword() {
+            const enteredPassword = passwordInput.value;
+            if (enteredPassword === PASSWORD) {
+                isUnlocked = true;
+                passwordScreen.style.display = 'none';
+                goToMainMenu();
+            } else {
+                passwordError.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
         function toggleSound() {
+            if (!isUnlocked) return;
+            
             soundEnabled = !soundEnabled;
             if (soundEnabled) {
                 soundBtn.innerHTML = '<span class="sound-icon">🔊</span> Ses Açık';
@@ -760,6 +869,8 @@
         }
 
         function showWordList() {
+            if (!isUnlocked) return;
+            
             homeScreen.style.display = 'none';
             quizScreen.style.display = 'none';
             setCompleted.style.display = 'none';
@@ -777,6 +888,8 @@
         }
 
         function startQuiz(mode) {
+            if (!isUnlocked) return;
+            
             quizMode = mode;
             homeScreen.style.display = 'none';
             quizScreen.style.display = 'block';
@@ -851,6 +964,7 @@
                 totalQuestionsElement.textContent = currentWordSet.length;
                 currentTotalElement.textContent = currentWordSet.length;
             }
+
             currentQuestion = 0;
             setScore = 0;
             currentSetElement.textContent = currentSet + 1;
@@ -864,6 +978,7 @@
                 endSet();
                 return;
             }
+
             const currentQ = currentWordSet[currentQuestion];
             currentQuestionElement.textContent = currentQuestion + 1;
             option1.textContent = currentQ.option1;
@@ -877,6 +992,8 @@
         }
 
         function checkAnswer(selectedOption) {
+            if (!isUnlocked) return;
+            
             const isCorrect = selectedOption.dataset.correct === "true";
             if (isCorrect) {
                 selectedOption.classList.add("correct");
@@ -895,12 +1012,14 @@
                 totalQuestionsAnswered++;
                 playIncorrectSound();
             }
+
             // Doğru cevabı da göster
             if (option1.dataset.correct === "true") {
                 option1.classList.add("correct");
             } else {
                 option2.classList.add("correct");
             }
+
             currentScoreElement.textContent = setScore;
             overallScoreElement.textContent = overallScore;
             setTimeout(() => {
@@ -915,6 +1034,7 @@
             finalScoreElement.textContent = setScore;
             finalTotalElement.textContent = currentWordSet.length;
             finalOverallScoreElement.textContent = overallScore;
+
             if (isRetryMode) {
                 setMessageElement.textContent = "Yanlış cevaplarınızı tekrar çözdünüz!";
                 nextSetBtn.textContent = "Sonraki Set";
@@ -926,10 +1046,12 @@
                 }
                 nextSetBtn.textContent = "Sonraki Set";
             }
+
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets - 1 && !isRetryMode) {
                 nextSetBtn.textContent = "Alıştırmayı Bitir";
             }
+
             if (wrongAnswers.length === 0 || isRetryMode) {
                 retryWrongBtn.style.display = "none";
             } else {
@@ -938,6 +1060,8 @@
         }
 
         function retryWrongAnswers() {
+            if (!isUnlocked) return;
+            
             isRetryMode = true;
             setCompleted.style.display = "none";
             quizScreen.style.display = "block";
@@ -945,24 +1069,33 @@
         }
 
         function nextSet() {
+            if (!isUnlocked) return;
+            
             if (isRetryMode) {
                 isRetryMode = false;
                 wrongAnswers = [];
             } else {
                 currentSet++;
             }
+
             const totalSets = Math.ceil(wordPairs.length / QUESTIONS_PER_SET);
             if (currentSet >= totalSets) {
                 alert(`Tebrikler! Alıştırma tamamlandı.\nToplam Skor: ${overallScore} doğru / ${totalQuestionsAnswered} soru`);
                 goToMainMenu();
                 return;
             }
+
             setCompleted.style.display = "none";
             quizScreen.style.display = "block";
             loadSet();
         }
 
         function goToMainMenu() {
+            if (!isUnlocked) {
+                showPasswordScreen();
+                return;
+            }
+            
             homeScreen.style.display = "block";
             quizScreen.style.display = "none";
             setCompleted.style.display = "none";
