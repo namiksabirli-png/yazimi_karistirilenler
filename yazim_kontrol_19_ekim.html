@@ -300,56 +300,6 @@
             background: #7f8c8d;
             transform: scale(1.05);
         }
-        /* Şifre Ekranı Stilleri */
-        .password-screen {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .password-container {
-            max-width: 300px;
-            margin: 0 auto;
-        }
-        .password-input {
-            width: 100%;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.3s;
-        }
-        .password-input:focus {
-            border-color: #3498db;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        .password-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .password-btn:hover {
-            background: linear-gradient(135deg, #27ae60, #219653);
-            transform: translateY(-2px);
-        }
-        .password-error {
-            color: #e74c3c;
-            margin-top: 10px;
-            display: none;
-        }
-        .locked-content {
-            display: none;
-        }
-        .unlocked-content {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -369,23 +319,8 @@
             </div>
         </div>
         <div class="quiz-container" id="quizContainer">
-            <!-- Şifre Ekranı -->
-            <div class="password-screen" id="passwordScreen">
-                <h2>Uygulamaya Erişim</h2>
-                <p>Lütfen şifreyi giriniz:</p>
-                <div class="password-container">
-                    <input type="password" class="password-input" id="passwordInput" placeholder="Şifre">
-                    <button class="password-btn" id="passwordBtn">Şifreyi Gir</button>
-                    <div class="password-error" id="passwordError">Hatalı şifre! Lütfen tekrar deneyin.</div>
-                </div>
-                <div class="instructions">
-                    <h3>Not:</h3>
-                    <p>Şifre varsayılan olarak "9119" olarak ayarlanmıştır. HTML kodunu düzenleyerek şifreyi değiştirebilirsiniz.</p>
-                </div>
-            </div>
-            
             <!-- Ana Menü -->
-            <div class="home-screen locked-content" id="homeScreen">
+            <div class="home-screen" id="homeScreen">
                 <h2>"Yazım Bilgisi Mini Alıştırması"na Hoş Geldiniz!</h2>
                 <div class="instructions">
                     <h3>Nasıl Oynanır:</h3>
@@ -448,7 +383,7 @@
             </div>
 
             <!-- Kelime Listesi Ekranı -->
-            <div class="word-list-screen locked-content" id="wordListScreen">
+            <div class="word-list-screen" id="wordListScreen">
                 <div class="word-list-header">
                     <h2 class="word-list-title">📚 Kelime Çalışma Tablosu</h2>
                     <button class="back-btn" id="backToListBtn">← Geri</button>
@@ -462,79 +397,103 @@
     </div>
 
     <script>
-        // Şifre değişkeni - HTML içinde kolayca değiştirilebilir
-        const PASSWORD = "9119";
-        
-        const wordPairs = [
-            { correct: "Doküman", incorrect: "Döküman" },
-            { correct: "İtibarıyla", incorrect: "İtibariyle" },
-            { correct: "Açgözlü", incorrect: "Aç gözlü" },
-            { correct: "Alt yazı", incorrect: "Altyazı" },
-            { correct: "Çevrim içi", incorrect: "Çevrimiçi" },
-            { correct: "Çevrim dışı", incorrect: "Çevrimdışı" },
-            { correct: "Hanımefendi", incorrect: "Hanım efendi" },
-            { correct: "Espri", incorrect: "Espiri" },
-            { correct: "Herhangi bir", incorrect: "Her hangi bir" },
-            { correct: "Bilinçaltı", incorrect: "Bilinç altı" },
-            { correct: "Hiçbir şey", incorrect: "Hiçbirşey" },
-            { correct: "Her şey", incorrect: "Herşey" },
-            { correct: "Karmakarışık", incorrect: "Karma karışık" },
-            { correct: "Saçma sapan", incorrect: "Saçmasapan" },
-            { correct: "Hallolmak", incorrect: "Hal olmak" },
-            { correct: "Katetmek", incorrect: "Kat etmek" },
-            { correct: "Vadetmek", incorrect: "Vaat etmek" },
-            { correct: "Menetmek", incorrect: "Men etmek" },
-            { correct: "Fark etmek", incorrect: "Farketmek" },
-            { correct: "Terk etmek", incorrect: "Terketmek" },
-            { correct: "Darbetmek", incorrect: "Darp etmek" },
-            { correct: "Cezbetmek", incorrect: "Cezpetmek" },
-            { correct: "Hak etmek", incorrect: "Hakketmek" },
-            { correct: "Dershane", incorrect: "Dersane" },
-            { correct: "Muayenehane", incorrect: "Muaynehane" },
-            { correct: "Yılbaşı", incorrect: "Yıl başı" },
-            { correct: "Satır başı", incorrect: "Satırbaşı" },
-            { correct: "Çalar saat", incorrect: "Çalarsaat" },
-            { correct: "Enstitü", incorrect: "Ensitü" },
-            { correct: "İnisiyatif", incorrect: "İnsiyatif" },
-            { correct: "Kolektif", incorrect: "Kollektif" },
-            { correct: "Entelektüel", incorrect: "Entellektüel" },
-            { correct: "Sömestir", incorrect: "Sömestr" },
-            { correct: "Stajyer", incorrect: "Stajer" },
-            { correct: "Şoför", incorrect: "Şöför" },
-            { correct: "Vejetaryen", incorrect: "Vejateryen" },
-            { correct: "Birdenbire", incorrect: "Birden bire" },
-            { correct: "Kravat", incorrect: "Kıravat" },
-            { correct: "Tıraş", incorrect: "Traş" },
-            { correct: "Tiraj", incorrect: "Traj" },
-            { correct: "Prizma", incorrect: "Pirizma" },
-            { correct: "Piramit", incorrect: "Pramit" },
-            { correct: "Kılavuz", incorrect: "Klavuz" },
-            { correct: "Yalnız", incorrect: "Yanlız" },
-            { correct: "Yanlış", incorrect: "Yalnış" },
-            { correct: "Çevre yolu", incorrect: "Çevreyolu" },
-            { correct: "Dağ evi", incorrect: "Dağevi" },
-            { correct: "Huzurevi", incorrect: "Huzur evi" },
-            { correct: "Bağ evi", incorrect: "Bağevi" },
-            { correct: "Kutup ayısı", incorrect: "Kutubayısı" },
-            { correct: "Boz ayı", incorrect: "Bozayı" },
-            { correct: "Köpek balığı", incorrect: "Köpekbalığı" },
-            { correct: "Alabalık", incorrect: "Ala balık" },
-            { correct: "Sivrisinek", incorrect: "Sivri sinek" },
-            { correct: "Karasinek", incorrect: "Karasinek" },
-            { correct: "Stat", incorrect: "Stad" },
-            { correct: "Etüt", incorrect: "Etüd" },
-            { correct: "Orijinal", incorrect: "Orjinal" },
-            { correct: "İkişer", incorrect: "2’şer" },
-            { correct: "Üçüncü", incorrect: "3’üncü" },
-            { correct: "Eczane", incorrect: "Eczahane" },
-            { correct: "Ayşe teyze", incorrect: "Ayşe Teyze" },
+const wordPairs = [
+            { correct: "doküman", incorrect: "döküman" },
+            { correct: "itibarıyla", incorrect: "itibariyle" },
+            { correct: "açgözlü", incorrect: "aç gözlü" },
+            { correct: "alt yazı", incorrect: "altyazı" },
+            { correct: "çevrim içi", incorrect: "çevrimiçi" },
+            { correct: "çevrim dışı", incorrect: "çevrimdışı" },
+            { correct: "hanımefendi", incorrect: "hanım efendi" },
+            { correct: "espri", incorrect: "espiri" },
+            { correct: "herhangi bir", incorrect: "her hangi bir" },
+            { correct: "bilinçaltı", incorrect: "bilinç altı" },
+            { correct: "hiçbir şey", incorrect: "hiçbirşey" },
+            { correct: "her şey", incorrect: "herşey" },
+            { correct: "karmakarışık", incorrect: "karma karışık" },
+            { correct: "saçma sapan", incorrect: "saçmasapan" },
+            { correct: "hallolmak", incorrect: "hal olmak" },
+            { correct: "katetmek", incorrect: "kat etmek" },
+            { correct: "vadetmek", incorrect: "vaat etmek" },
+            { correct: "menetmek", incorrect: "men etmek" },
+            { correct: "fark etmek", incorrect: "farketmek" },
+            { correct: "terk etmek", incorrect: "terketmek" },
+            { correct: "darbetmek", incorrect: "darp etmek" },
+            { correct: "cezbetmek", incorrect: "cezpetmek" },
+            { correct: "hak etmek", incorrect: "hakketmek" },
+            { correct: "dershane", incorrect: "dersane" },
+            { correct: "muayenehane", incorrect: "muaynehane" },
+            { correct: "yılbaşı", incorrect: "yıl başı" },
+            { correct: "satır başı", incorrect: "satırbaşı" },
+            { correct: "çalar saat", incorrect: "çalarsaat" },
+            { correct: "enstitü", incorrect: "ensitü" },
+            { correct: "inisiyatif", incorrect: "insiyatif" },
+            { correct: "kolektif", incorrect: "kollektif" },
+            { correct: "entelektüel", incorrect: "entellektüel" },
+            { correct: "sömestir", incorrect: "sömestr" },
+            { correct: "stajyer", incorrect: "stajer" },
+            { correct: "şoför", incorrect: "şöför" },
+            { correct: "birdenbire", incorrect: "birden bire" },
+            { correct: "kravat", incorrect: "kıravat" },
+            { correct: "tıraş", incorrect: "traş" },
+            { correct: "tiraj", incorrect: "traj" },
+            { correct: "prizma", incorrect: "pirizma" },
+            { correct: "piramit", incorrect: "pramit" },
+            { correct: "kılavuz", incorrect: "klavuz" },
+            { correct: "yalnız", incorrect: "yanlız" },
+            { correct: "yanlış", incorrect: "yalnış" },
+            { correct: "çevre yolu", incorrect: "çevreyolu" },
+            { correct: "dağ evi", incorrect: "dağevi" },
+            { correct: "huzurevi", incorrect: "huzur evi" },
+            { correct: "bağ evi", incorrect: "bağevi" },
+            { correct: "boz ayı", incorrect: "bozayı" },
+            { correct: "köpek balığı", incorrect: "köpekbalığı" },
+            { correct: "alabalık", incorrect: "ala balık" },
+            { correct: "sivrisinek", incorrect: "sivri sinek" },
+            { correct: "karasinek", incorrect: "karasinek" },
+            { correct: "stat", incorrect: "stad" },
+            { correct: "etüt", incorrect: "etüd" },
+            { correct: "orijinal", incorrect: "orjinal" },
+            { correct: "ikişer", incorrect: "2’şer" },
+            { correct: "3'üncü", incorrect: "3’ncü" },
+            { correct: "eczane", incorrect: "eczahane" },
+            { correct: "Ayşe teyze", incorrect: "ayşe Teyze" },
             { correct: "Türkçeyi", incorrect: "Türkçe’yi" },
             { correct: "23 Nisan’da", incorrect: "23 nisanda" },
             { correct: "1919’un Mayıs ayı", incorrect: "1919’un mayıs ayı" },
-            { correct: "Vaz mı geçtik", incorrect: "Vazmıgeçtik" },
-            { correct: "Kuşadamızı", incorrect: "Kuşadamız’ı" },
+            { correct: "vaz mı geçtik", incorrect: "vazmıgeçtik" },
+            { correct: "bir gün", incorrect: "birgün" },
+	    { correct: "çay ya da kahve", incorrect: "çay yada kahve" },
+    	    { correct: "25-Nisan-2026", incorrect: "25 Nisan 2026" },
+	    { correct: "25-04-2026", incorrect: "25.04.2026" },
+	    { correct: "Anneler Günü'nde", incorrect: "Anneler gününde" },
+	    { correct: "5.000 lira", incorrect: "5.000 Lira" },
+	    { correct: "14.30'da", incorrect: "14:30'da" },
+	    { correct: "15.00'da", incorrect: "15.00'te" },
+	    { correct: "yedi sekiz kişi", incorrect: "yedi-sekiz kişi" },
+	    { correct: "yazar kasa", incorrect: "yazarkasa" },
+	    { correct: "Kuşadamıza", incorrect: "Kuşadamız'a" },
+ 	    { correct: "İstanbullulara", incorrect: "İstanbullular'a" },
+ 	    { correct: "İllaki", incorrect: "İlla ki" },
+ 	    { correct: "Ola ki", incorrect: "Olaki" },
+ 	    { correct: "ön söz", incorrect: "önsöz" },
+ 	    { correct: "öz eleştiri", incorrect: "özeleştiri" },
+ 	    { correct: "konuksever", incorrect: "konuk sever" },
+	    { correct: "öz güven", incorrect: "özgüven" },
+	    { correct: "art arda", incorrect: "ardarda" },
+	    { correct: "ant içmek", incorrect: "and içmek" },
+	    { correct: "10 kg'ını", incorrect: "10 kg'sini" },
+	    { correct: "sağ olun", incorrect: "sağolun" },
+	    { correct: "başüstüne", incorrect: "baş üstüne" },
+	    { correct: "başıbozuk", incorrect: "başı bozuk" },
+	    { correct: "hoş geldiniz", incorrect: "hoşgeldiniz" },
+	    { correct: "çağ dışı", incorrect: "çağdışı" },
+	    { correct: "ilk yardım", incorrect: "ilkyardım" },
+	    { correct: "kuş bakışı", incorrect: "kuşbakışı" },
+	    { correct: "yıl dönümü", incorrect: "yıldönümü" },
+	    { correct: "bilim kurgu", incorrect: "bilimkurgu" },	
             { correct: "Konya Ovamıza", incorrect: "Konya Ova’mıza" },
-            { correct: "Muğla’mıza", incorrect: "Muğlamıza" }
+            { correct: "İstanbul’umuz", incorrect: "İstanbulumuz" }
         ];
 
         // Quiz değişkenleri
@@ -548,7 +507,6 @@
         let currentWordSet = [];
         let soundEnabled = true;
         let quizMode = 'same'; // 'same' veya 'diff'
-        let isUnlocked = false; // Şifre kontrolü için
 
         const QUESTIONS_PER_SET = 10;
 
@@ -557,7 +515,6 @@
         const quizScreen = document.getElementById('quizScreen');
         const setCompleted = document.getElementById('setCompleted');
         const wordListScreen = document.getElementById('wordListScreen');
-        const passwordScreen = document.getElementById('passwordScreen');
         const mainMenuBtn = document.getElementById('mainMenuBtn');
         const soundBtn = document.getElementById('soundBtn');
         const wordListBtn = document.getElementById('wordListBtn');
@@ -583,9 +540,6 @@
         const wordListContainer = document.getElementById('wordListContainer');
         const sameWordsBtn = document.getElementById('sameWordsBtn');
         const diffWordsBtn = document.getElementById('diffWordsBtn');
-        const passwordInput = document.getElementById('passwordInput');
-        const passwordBtn = document.getElementById('passwordBtn');
-        const passwordError = document.getElementById('passwordError');
 
         // Ses efektleri
         function playCorrectSound() {
@@ -620,16 +574,8 @@
 
         // Başlangıç
         function init() {
-            // Şifre ekranını göster
-            showPasswordScreen();
-            
-            passwordBtn.addEventListener('click', checkPassword);
-            passwordInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkPassword();
-                }
-            });
-            
+            goToMainMenu();
+
             sameWordsBtn.addEventListener('click', () => startQuiz('same'));
             diffWordsBtn.addEventListener('click', () => startQuiz('diff'));
             mainMenuBtn.addEventListener('click', goToMainMenu);
@@ -645,31 +591,8 @@
             totalSetsElement.textContent = totalSets;
         }
 
-        function showPasswordScreen() {
-            passwordScreen.style.display = 'block';
-            homeScreen.style.display = 'none';
-            quizScreen.style.display = 'none';
-            setCompleted.style.display = 'none';
-            wordListScreen.style.display = 'none';
-        }
-
-        function checkPassword() {
-            const enteredPassword = passwordInput.value;
-            if (enteredPassword === PASSWORD) {
-                isUnlocked = true;
-                passwordScreen.style.display = 'none';
-                goToMainMenu();
-            } else {
-                passwordError.style.display = 'block';
-                passwordInput.value = '';
-                passwordInput.focus();
-            }
-        }
-
         function toggleSound() {
-            if (!isUnlocked) return;
-            
-            soundEnabled = !soundEnabled;
+soundEnabled = !soundEnabled;
             if (soundEnabled) {
                 soundBtn.innerHTML = '<span class="sound-icon">🔊</span> Ses Açık';
                 soundBtn.style.background = '#e67e22';
@@ -680,9 +603,7 @@
         }
 
         function showWordList() {
-            if (!isUnlocked) return;
-            
-            homeScreen.style.display = 'none';
+homeScreen.style.display = 'none';
             quizScreen.style.display = 'none';
             setCompleted.style.display = 'none';
             wordListScreen.style.display = 'block';
@@ -699,9 +620,7 @@
         }
 
         function startQuiz(mode) {
-            if (!isUnlocked) return;
-            
-            quizMode = mode;
+quizMode = mode;
             homeScreen.style.display = 'none';
             quizScreen.style.display = 'block';
             setCompleted.style.display = 'none';
@@ -803,9 +722,7 @@
         }
 
         function checkAnswer(selectedOption) {
-            if (!isUnlocked) return;
-            
-            const isCorrect = selectedOption.dataset.correct === "true";
+const isCorrect = selectedOption.dataset.correct === "true";
             if (isCorrect) {
                 selectedOption.classList.add("correct");
                 correctFeedback.style.display = "block";
@@ -871,18 +788,14 @@
         }
 
         function retryWrongAnswers() {
-            if (!isUnlocked) return;
-            
-            isRetryMode = true;
+isRetryMode = true;
             setCompleted.style.display = "none";
             quizScreen.style.display = "block";
             loadSet();
         }
 
         function nextSet() {
-            if (!isUnlocked) return;
-            
-            if (isRetryMode) {
+if (isRetryMode) {
                 isRetryMode = false;
                 wrongAnswers = [];
             } else {
@@ -902,12 +815,7 @@
         }
 
         function goToMainMenu() {
-            if (!isUnlocked) {
-                showPasswordScreen();
-                return;
-            }
-            
-            homeScreen.style.display = "block";
+homeScreen.style.display = "block";
             quizScreen.style.display = "none";
             setCompleted.style.display = "none";
             wordListScreen.style.display = "none";
